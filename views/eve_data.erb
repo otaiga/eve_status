@@ -1,0 +1,17 @@
+<h1><%= @title %></h1>
+<table>
+  <thread>
+    <tr>
+    <% eve_keys.each do |key| %>
+      <th><%= key %></th>
+    <% end %>
+  </thread>
+  <% eve_rows.each do |row| %>
+    <%= puts row %>
+    <tr>
+      <% eve_keys.each do |keyname| %>
+        <td><%= row[keyname] %> </td>
+      <% end %>
+    </tr>
+  <% end %>
+</table>
