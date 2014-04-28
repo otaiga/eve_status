@@ -2,21 +2,27 @@ module EveHelpers
 
   module SkillsHelper
     def skill_response(skill_response)
-      main_hash = {}
-      main_hash[:name] = 'skill_tree'
+      main_hash = {
+        name: 'skill_tree'
+      }
+      groups = []
       skills = []
       default_rows(skill_response).each do |row|
         skill_skills(row).each do |skill|
           skills << skill_hash(skill) if skill.kind_of?(Hash)
         end
-        main_hash.merge! (
-          {
-            group: skill_group_name(row),
-            skills: skills.compact
-          }
-        )
+        group_hash = {}
+        group_hash = {
+          group: skill_group_name(row),
+          skills: skills.compact
+        }
+        groups << group_hash
       end
-      main_hash
+      main_hash.merge(
+        {
+          groups: groups
+        }
+      )
     end
 
     def skill_group_name(row)

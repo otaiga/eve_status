@@ -1,0 +1,13 @@
+<h1><%= @title %></h1>
+<% @data[:groups].each do |group| %>
+  <h2> <%= group[:group] %> </h2>
+  <table>
+    <% group[:skills].each do |skill| %>
+      <tr>
+        <td><%= skill[:type_name] %></td>
+        <td><%= skill[:description] %></td>
+        <td><%= skill[:rank] %> </td>
+      </tr>
+    <% end %>
+  </table>
+<% end %>
