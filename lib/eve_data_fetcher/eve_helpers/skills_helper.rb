@@ -1,36 +1,30 @@
 module EveHelpers
-
+  # Help weed out the skills in nice format
   module SkillsHelper
     def skill_response(skill_response)
-      main_hash = {
-        name: 'skill_tree'
-      }
       groups = []
-      skills = []
-      default_rows(skill_response).each do |row|
-        skill_skills(row).each do |skill|
-          skills << skill_hash(skill) if skill.kind_of?(Hash)
+      known_groups(skill_response).each do |key|
+        skills = []
+        default_rows(skill_response).each do |row|
+          skills = compile_skills(row, skills) if skill_group_name(row) == key
         end
-        group_hash = {}
-        group_hash = {
-          group: skill_group_name(row),
-          skills: skills.compact
-        }
-        groups << group_hash
+        groups << group_hash(key, skills.compact)
       end
-      main_hash.merge(
-        {
-          groups: groups
-        }
-      )
+      groups
     end
 
-    def skill_group_name(row)
-      row['groupName']
+    def group_hash(key, skills)
+      {
+        group: key,
+        skills: skills
+      }
     end
 
-    def skill_skills(data)
-      data['rowset']['row']
+    def compile_skills(row, skills)
+      skill_skills(row).each do |skill|
+        skills << skill_hash(skill) if skill.kind_of?(Hash)
+      end
+      skills
     end
 
     def skill_hash(skill)
@@ -47,15 +41,39 @@ module EveHelpers
 
     def required_skills(skill)
       required_skills = []
+      skill_bonus_collection = []
       skill['rowset'].each do |rq|
-        required_skills << rq['row']
+        required_skills << rq['row'] if required_skill(rq['name'])
+        skill_bonus_collection << rq['row'] if bonus_collection(rq['name'])
       end
-      required_skills.compact
+      {
+        required_skills: required_skills.compact,
+        skill_bonus_collection: skill_bonus_collection.compact
+      }
     end
 
     def default_rows(response)
       response['eveapi']['result']['rowset']['row']
     end
-  end
 
+    def required_skill(name)
+      name == 'requiredSkills'
+    end
+
+    def bonus_collection(name)
+      name == 'skillBonusCollection'
+    end
+
+    def skill_group_name(row)
+      row['groupName']
+    end
+
+    def known_groups(response)
+      default_rows(response).map { |a| a['groupName'] }.uniq
+    end
+
+    def skill_skills(data)
+      data['rowset']['row']
+    end
+  end
 end

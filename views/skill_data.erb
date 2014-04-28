@@ -1,5 +1,5 @@
 <h1><%= @title %></h1>
-<% @data[:groups].each do |group| %>
+<% @data.each do |group| %>
   <h2> <%= group[:group] %> </h2>
   <table>
     <% group[:skills].each do |skill| %>

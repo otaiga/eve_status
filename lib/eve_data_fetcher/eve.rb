@@ -51,6 +51,5 @@ module EveDataFetcher
       response = call_eve('eve/SkillTree.xml.aspx')
       skill_response(response.parsed_response)
     end
-
   end
 end
