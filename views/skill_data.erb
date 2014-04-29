@@ -1,13 +1,80 @@
+<head>
+  <link rel="stylesheet" type="text/css" href="stylesheets/application.css">
+</head>
 <h1><%= @title %></h1>
 <% @data.each do |group| %>
-  <h2> <%= group[:group] %> </h2>
-  <table>
-    <% group[:skills].each do |skill| %>
+  <h2><%= group[:group] %></h2>
+  <h3>Skills</h3>
+  <% group[:skills].each do |skill| %>
+    <table>
+      <thread>
+        <tr>
+          <th>Skill Name</th>
+          <th>Group ID</th>
+          <th>Type ID</th>
+          <th>Description</th>
+          <th>Rank</th>
+          <th>Primary Required Attribute</th>
+          <th>Secondary Required Attribute</th>
+        </tr>
+      </thread>
       <tr>
         <td><%= skill[:type_name] %></td>
+        <td><%= skill[:group_id] %></td>
+        <td><%= skill[:type_id] %></td>
         <td><%= skill[:description] %></td>
-        <td><%= skill[:rank] %> </td>
+        <td><%= skill[:rank] %></td>
+        <td><%= skill[:requiredAttributes]['primaryAttribute'] %></td>
+        <td><%= skill[:requiredAttributes]['secondaryAttribute'] %></td>
       </tr>
+    </table>
+    <% if !skill[:requiredSkills][:required_skills].empty? %>
+      <table>
+        <thread>
+          <tr>
+            <th>Skill ID</th>
+            <th>Skill Level</th>
+          </tr>
+        </thread>
+        <% skill[:requiredSkills][:required_skills].each do |rqs| %>
+          <% if rqs.kind_of?(Array) %>
+            <% rqs.each do |rs| %>
+              <tr>
+                <td><%= rs['typeID'] %></td>
+                <td><%= rs['skillLevel'] %></td>
+              </tr>
+            <% end %>
+          <% else %>
+            <tr>
+              <td><%= rqs['typeID'] %></td>
+              <td><%= rqs['skillLevel'] %></td>
+            </tr>
+          <% end %>
+        <% end %>
+      </table>
     <% end %>
-  </table>
+    <table>
+      <thread>
+        <tr>
+          <th>Bonus Type</th>
+          <th>Bonus Value</th>
+        </tr>
+      </thread>
+      <% skill[:requiredSkills][:skill_bonus_collection].each do |bs| %>
+        <% if bs.kind_of?(Array) %>
+          <% bs.each do |b| %>
+            <tr>
+              <td><%= b['bonusType'] %></td>
+              <td><%= b['bonusValue'] %></td>
+            </tr>
+          <% end %>
+        <% else %>
+          <tr>
+            <td><%= bs['bonusType'] %></td>
+            <td><%= bs['bonusValue'] %></td>
+          </tr>
+        <% end %>
+      <% end %>
+    </table>
+  <% end %>
 <% end %>
