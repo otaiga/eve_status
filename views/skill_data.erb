@@ -14,8 +14,8 @@
         <th>Rank</th>
         <th>Primary Required Attribute</th>
         <th>Secondary Required Attribute</th>
-        <th colspan='2'>Required Skills</th>
-        <th colspan='2'>Skill Bonus Collection</th>
+        <th>Required Skills</th>
+        <th>Skill Bonus Collection</th>
       </tr>
     </thread>
     <% group[:skills].each do |skill| %>
@@ -27,48 +27,60 @@
         <td><%= skill[:rank] %></td>
         <td><%= skill[:requiredAttributes]['primaryAttribute'] %></td>
         <td><%= skill[:requiredAttributes]['secondaryAttribute'] %></td>
-        <% if !skill[:requiredSkills][:required_skills].empty? %>
-          <% skill[:requiredSkills][:required_skills].each do |rqs| %>
-            <% if rqs.kind_of?(Array) %>
-              <% rqs.each_with_index do |rs, i| %>
-                <% if i == 0 %>
-                    <td><%= rs['typeID'] %></td>
-                    <td><%= rs['skillLevel'] %></td>
-                <% else %>
-                  </tr>
-                  <tr>
-                    <td colspan='7'></td>
-                    <td><%= rs['typeID'] %></td>
-                    <td><%= rs['skillLevel'] %></td>
-                <% end %>
-              <% end %>
-            <% else %>
-              <td><%= rqs['typeID'] %></td>
-              <td><%= rqs['skillLevel'] %></td>
+        <td>
+          <% if !skill[:requiredSkills][:required_skills].empty? %>
+            <% skill[:requiredSkills][:required_skills].each do |rqs| %>
+                <table>
+                  <thread>
+                    <tr>
+                      <th>Type ID</th>
+                      <th>Skill Level</th>
+                    </tr>
+                  </thread>
+                  <% if rqs.kind_of?(Array) %>
+                    <% rqs.each do |rs| %>
+                      <tr>
+                        <td><%= rs['typeID'] %></td>
+                        <td><%= rs['skillLevel'] %></td>
+                      </tr>
+                    <% end %>
+                  <% else %>
+                    <tr>
+                      <td><%= rqs['typeID'] %></td>
+                      <td><%= rqs['skillLevel'] %></td>
+                    </tr>
+                  <% end %>
+                </table>
             <% end %>
           <% end %>
-        <% end %>
-        <% if !skill[:requiredSkills][:skill_bonus_collection].empty? %>
-          <% skill[:requiredSkills][:skill_bonus_collection].each do |bs| %>
-            <% if bs.kind_of?(Array) %>
-              <% bs.each_with_index do |b, i| %>
-                <% if i == 0 %>
-                    <td><%= b['bonusType'] %></td>
-                    <td><%= b['bonusValue'] %></td>                  
-                <% else %>
-                  <tr>
-                    <td colspan='9'></td>
-                    <td><%= b['bonusType'] %></td>
-                    <td><%= b['bonusValue'] %></td>
-                  </tr>
-                <% end %>
-              <% end %>
-            <% else %>
-              <td><%= bs['bonusType'] %></td>
-              <td><%= bs['bonusValue'] %></td>
+        </td>
+        <td>
+          <% if !skill[:requiredSkills][:skill_bonus_collection].empty? %>
+            <% skill[:requiredSkills][:skill_bonus_collection].each do |rqs| %>
+                <table>
+                  <thread>
+                    <tr>
+                      <th>Bonus Type</th>
+                      <th>Bonus Value</th>
+                    </tr>
+                  </thread>
+                  <% if rqs.kind_of?(Array) %>
+                    <% rqs.each do |rs| %>
+                      <tr>
+                        <td><%= rs['bonusType'] %></td>
+                        <td><%= rs['bonusValue'] %></td>
+                      </tr>
+                    <% end %>
+                  <% else %>
+                    <tr>
+                      <td><%= rqs['bonusType'] %></td>
+                      <td><%= rqs['bonusValue'] %></td>
+                    </tr>
+                  <% end %>
+                </table>
             <% end %>
           <% end %>
-        <% end %>
+        </td>
       </tr>
     <% end %>
   </table>
