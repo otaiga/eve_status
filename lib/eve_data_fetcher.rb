@@ -2,6 +2,7 @@ require 'httparty'
 require_relative 'eve_data_fetcher/eve'
 require_relative 'eve_data_fetcher/maps'
 require_relative 'eve_data_fetcher/misc'
+require_relative 'eve_data_fetcher/eve_helpers'
 
 # Get General data using eve apis
 module EveDataFetcher

@@ -13,6 +13,14 @@ module Sinatra
         data = @data['eveapi']['result']['rowset'].map { |a| a['row'] }
         return data.compact.flatten
       end
+      default_row_data
+    end
+
+    def type_name
+      @data['eveapi']['result']['rowset']['name']
+    end
+
+    def default_row_data
       @data['eveapi']['result']['rowset']['row']
     end
   end

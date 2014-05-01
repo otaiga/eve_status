@@ -1,0 +1,43 @@
+<head>
+  <link rel="stylesheet" type="text/css" href="stylesheets/application.css">
+</head>
+<h1><%= @title %></h1>
+<% @data.each do |group| %>
+  <%= group[:group] %>
+  <table>
+    <thread>
+      <tr>
+        <th>Skill Name</th>
+        <th>Description</th>
+        <th>Rank</th>
+        <th>Primary Required Attribute</th>
+        <th>Secondary Required Attribute</th>
+        <th>Required Skills</th>
+      </tr>
+    </thread>
+    <% group[:skills].each do |skill| %>
+      <tr>
+        <td><%= skill[:type_name] %></td>
+        <td><%= skill[:description] %></td>
+        <td><%= skill[:rank] %></td>
+        <td><%= skill[:requiredAttributes]['primaryAttribute'] %></td>
+        <td><%= skill[:requiredAttributes]['secondaryAttribute'] %></td>
+        <td class='required'>
+          <% unless skill[:requiredSkills][:required_skills].empty? %>
+            <% skill[:requiredSkills][:required_skills].each do |rqs| %>
+              <% if rqs.kind_of?(Array) %>
+                <ul>
+                  <% rqs.each do |rs| %>
+                    <li><%= rs['name'].nil? ? rs['typeID'] : rs['name'] %> : (Level <%= rs['skillLevel'] %>)</li>
+                  <% end %>
+                </ul>
+              <% else %>
+                <%= rqs['name'] %> : (Level <%= rqs['skillLevel'] %>)
+              <% end %>
+            <% end %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+<% end %>
