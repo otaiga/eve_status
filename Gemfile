@@ -5,6 +5,7 @@ gem 'httparty'
 gem 'memcachier'
 gem 'dalli'
 gem 'rack-cache'
+gem 'newrelic_rpm'
 
 group :production do
   gem 'thin'
