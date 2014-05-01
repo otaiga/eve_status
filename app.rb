@@ -3,6 +3,10 @@ require_relative './helpers/view_helpers'
 
 helpers Sinatra::ViewHelpers
 
+before '/*' do
+  cache_control :public, max_age: 3600
+end
+
 get '/' do
   erb :index
 end
@@ -32,7 +36,6 @@ get '/reference_types' do
 end
 
 get '/skill_tree' do
-  cache_control :public, max_age: 3600
   @data = EveDataFetcher.skill_tree
   @title = 'Skill Tree'
   erb :skill_data
