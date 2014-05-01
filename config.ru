@@ -1,5 +1,7 @@
 require './app.rb'
 require './lib/eve_data_fetcher'
+require 'memcachier'
+require 'dalli'
 
 if memcache_servers = ENV["MEMCACHIER_SERVERS"]
   use Rack::Cache,
