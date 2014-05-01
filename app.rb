@@ -1,6 +1,10 @@
 require 'sinatra'
 require_relative './helpers/view_helpers'
 
+configure :production do
+  require 'newrelic_rpm'
+end
+
 helpers Sinatra::ViewHelpers
 
 before '/*' do
