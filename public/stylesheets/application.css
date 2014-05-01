@@ -72,6 +72,16 @@ table td {
   background: -webkit-gradient(linear, left top, left bottom, from(#fbfbfb), to(#fafafa));
   background: -moz-linear-gradient(top,  #fbfbfb,  #fafafa);
 }
+
+table td.required {
+  white-space:nowrap;
+}
+
+table td.required ul{
+  padding:0;
+  list-style-type: none;
+}
+
 table tr.even td {
   background: #f6f6f6;
   background: -webkit-gradient(linear, left top, left bottom, from(#f8f8f8), to(#f6f6f6));

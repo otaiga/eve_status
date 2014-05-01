@@ -8,76 +8,32 @@
     <thread>
       <tr>
         <th>Skill Name</th>
-        <th>Group ID</th>
-        <th>Type ID</th>
         <th>Description</th>
         <th>Rank</th>
         <th>Primary Required Attribute</th>
         <th>Secondary Required Attribute</th>
         <th>Required Skills</th>
-        <th>Skill Bonus Collection</th>
       </tr>
     </thread>
     <% group[:skills].each do |skill| %>
       <tr>
         <td><%= skill[:type_name] %></td>
-        <td><%= skill[:group_id] %></td>
-        <td><%= skill[:type_id] %></td>
         <td><%= skill[:description] %></td>
         <td><%= skill[:rank] %></td>
         <td><%= skill[:requiredAttributes]['primaryAttribute'] %></td>
         <td><%= skill[:requiredAttributes]['secondaryAttribute'] %></td>
-        <td>
-          <% if !skill[:requiredSkills][:required_skills].empty? %>
+        <td class='required'>
+          <% unless skill[:requiredSkills][:required_skills].empty? %>
             <% skill[:requiredSkills][:required_skills].each do |rqs| %>
-                <table>
-                  <thread>
-                    <tr>
-                      <th>Type ID</th>
-                      <th>Skill Level</th>
-                    </tr>
-                  </thread>
-                  <% if rqs.kind_of?(Array) %>
-                    <% rqs.each do |rs| %>
-                      <tr>
-                        <td><%= rs['typeID'] %></td>
-                        <td><%= rs['skillLevel'] %></td>
-                      </tr>
-                    <% end %>
-                  <% else %>
-                    <tr>
-                      <td><%= rqs['typeID'] %></td>
-                      <td><%= rqs['skillLevel'] %></td>
-                    </tr>
+              <% if rqs.kind_of?(Array) %>
+                <ul>
+                  <% rqs.each do |rs| %>
+                    <li><%= rs['name'].nil? ? rs['typeID'] : rs['name'] %> : (Level <%= rs['skillLevel'] %>)</li>
                   <% end %>
-                </table>
-            <% end %>
-          <% end %>
-        </td>
-        <td>
-          <% if !skill[:requiredSkills][:skill_bonus_collection].empty? %>
-            <% skill[:requiredSkills][:skill_bonus_collection].each do |rqs| %>
-                <table>
-                  <thread>
-                    <tr>
-                      <th>Bonus Type</th>
-                      <th>Bonus Value</th>
-                    </tr>
-                  </thread>
-                  <% if rqs.kind_of?(Array) %>
-                    <% rqs.each do |rs| %>
-                      <tr>
-                        <td><%= rs['bonusType'] %></td>
-                        <td><%= rs['bonusValue'] %></td>
-                      </tr>
-                    <% end %>
-                  <% else %>
-                    <tr>
-                      <td><%= rqs['bonusType'] %></td>
-                      <td><%= rqs['bonusValue'] %></td>
-                    </tr>
-                  <% end %>
-                </table>
+                </ul>
+              <% else %>
+                <%= rqs['name'] %> : (Level <%= rqs['skillLevel'] %>)
+              <% end %>
             <% end %>
           <% end %>
         </td>
