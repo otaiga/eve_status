@@ -17,6 +17,8 @@ GEM
       slop (~> 3.4, >= 3.4.5)
     powerpack (0.0.9)
     rack (1.5.2)
+    rack-cache (1.2)
+      rack (>= 0.4)
     rack-protection (1.5.3)
       rack
     rainbow (2.0.0)
@@ -53,6 +55,7 @@ DEPENDENCIES
   dalli
   httparty
   memcachier
+  rack-cache
   rspec
   rubocop
   sinatra
