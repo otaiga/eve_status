@@ -34,5 +34,5 @@ end
 get '/skill_tree' do
   @data = EveDataFetcher.skill_tree
   @title = 'Skill Tree'
-  erb :eve_data
+  erb :skill_data
 end
