@@ -32,6 +32,7 @@ get '/reference_types' do
 end
 
 get '/skill_tree' do
+  cache_control :public, max_age: 3600
   @data = EveDataFetcher.skill_tree
   @title = 'Skill Tree'
   erb :skill_data
