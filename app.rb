@@ -44,3 +44,9 @@ get '/skill_tree' do
   @title = 'Skill Tree'
   erb :skill_data
 end
+
+get '/server_stats.json' do
+  status 200
+  content_type :json
+  EveDataFetcher::Misc.server_status.to_json
+end

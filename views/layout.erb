@@ -46,6 +46,10 @@
               </ul>
             </li>
           </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#">Online Status: <span id='online_status'>...</span></a></li>
+            <li><a href="#">Online Player Count: <span class='label label-info' id='player_count'>...</span></a></li>
+          </ul>
         </div><!--/.nav-collapse -->
       </div>
     </div>
@@ -55,5 +59,9 @@
 
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/bootstrap.min.js"></script>
+    <script src='js/custom.js'></script>
+    <script>
+      getServerStats();
+    </script>
   </body>
 </html>
