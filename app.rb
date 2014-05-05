@@ -8,7 +8,7 @@ end
 helpers Sinatra::ViewHelpers
 
 before '/*' do
-  cache_control :public, max_age: 3600
+  cache_control :public, max_age: 86400
 end
 
 get '/' do
@@ -18,6 +18,7 @@ end
 get '/alliance_info' do
   @data = EveDataFetcher::Eve.alliance_info
   @title = 'Alliance info'
+  @path = 'alliance_info.json'
   erb :eve_data
 end
 
@@ -45,8 +46,11 @@ get '/skill_tree' do
   erb :skill_data
 end
 
+
+# JSON requests
 get '/server_stats.json' do
   status 200
   content_type :json
   EveDataFetcher::Misc.server_status.to_json
 end
+
