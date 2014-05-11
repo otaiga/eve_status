@@ -1,7 +1,7 @@
 function getServerStats(){
   $.ajax(
     {
-      url: '/server_stats.json',
+      url: '/api/server_stats.json',
       dataType: 'json',
       type: 'get',
       success: function(data) {
