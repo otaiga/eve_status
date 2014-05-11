@@ -30,6 +30,7 @@ group :development do
   gem 'spring'
   gem 'rspec-rails'
   gem 'rubocop'
+  gem 'brakeman'
 end
 
 # Use ActiveModel has_secure_password
