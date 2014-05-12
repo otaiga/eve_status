@@ -1,6 +1,6 @@
 module Api
   # misc api calls
-  class MiscApisController < API::BaseController
+  class MiscApisController < Api::BaseController
     def server_stats
       data = EveDataFetcher::Misc.server_status.to_json
       render json: data

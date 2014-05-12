@@ -1,4 +1,4 @@
-module API
+module Api
   # API base Controller
   class BaseController < ActionController::Base
     before_action :check_json
