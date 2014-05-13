@@ -2,7 +2,7 @@ module Api
   # misc api calls
   class GeneralApisController < Api::BaseController
     def skill_tree
-      groups = formatted_data.as_json(except: [:id, :created_at, :updated_at])
+      groups = formatted_data.as_json(except: non_required_fields)
       render json: groups
     end
 
@@ -19,12 +19,28 @@ module Api
 
     def formatted_skills(group)
       group.eve_skills.all.map do |skill|
-        skill.as_json(except: [:id, :created_at, :updated_at]).merge(
-          required_skills: skill.eve_required_skills.as_json(except: [:id, :created_at, :updated_at]),
-          required_attributes: skill.eve_required_attributes.as_json(except: [:id, :created_at, :updated_at]),
-          bonus_collection: skill.eve_skill_bonus_collections.as_json(except: [:id, :created_at, :updated_at])
+        skill.as_json(except: non_required_fields).merge(
+          required_skills: eve_required_skills(skill),
+          required_attributes: eve_required_attributes(skill),
+          bonus_collection: eve_skill_bonus_collections(skill)
         )
       end
+    end
+
+    def eve_required_skills(skill)
+      skill.eve_required_skills.as_json(except: non_required_fields)
+    end
+
+    def eve_required_attributes(skill)
+      skill.eve_required_attributes.as_json(except: non_required_fields)
+    end
+
+    def eve_skill_bonus_collections(skill)
+      skill.eve_skill_bonus_collections.as_json(except: non_required_fields)
+    end
+
+    def non_required_fields
+      [:id, :created_at, :updated_at]
     end
   end
 end
