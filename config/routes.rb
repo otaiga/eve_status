@@ -8,5 +8,6 @@ Rails.application.routes.draw do
   # Example resource route within a namespace:
     namespace :api do
       get 'server_stats', to: 'misc_apis#server_stats'
+      get 'skill_tree', to: 'general_apis#skill_tree'
     end
 end
