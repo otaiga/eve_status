@@ -1,0 +1,70 @@
+<h1>Skill Listings</h1>
+<%= data = content_tag(:div, nil, id: 'skillRaw' ) %>
+
+<div id="skillTree" ng-controller="skillTree">
+  </div>
+</div>
+<% @data = [] %>
+<% @data.each  do |group| %>
+  <div class="panel-group" id="accordion">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" data-parent="#accordion" href="#<%= group[:group].gsub(' ', '-') %>">
+            <%= group[:group] %>
+          </a>
+        </h4>
+      </div>
+      <div id="<%= group[:group].gsub(' ', '-')  %>" class="panel-collapse collapse in">
+        <div class="panel-body">
+          <table class='table table-striped table-hover'>
+            <thread>
+              <tr>
+                <th>Skill Name</th>
+                <th>Description</th>
+                <th>Rank</th>
+                <th>Primary Required Attribute</th>
+                <th>Secondary Required Attribute</th>
+                <th>Required Skills</th>
+              </tr>
+            </thread>
+            <% group[:skills].each do |skill| %>
+              <tr>
+                <td><%= skill[:type_name] %></td>
+                <td><%= skill[:description] %></td>
+                <td><%= skill[:rank] %></td>
+                <td><%= skill[:requiredAttributes]['primaryAttribute'] %></td>
+                <td><%= skill[:requiredAttributes]['secondaryAttribute'] %></td>
+                <td class='required'>
+                  <% unless skill[:requiredSkills][:required_skills].empty? %>
+                    <% skill[:requiredSkills][:required_skills].each do |rqs| %>
+                      <% if rqs.kind_of?(Array) %>
+                        <ul>
+                          <% rqs.each do |rs| %>
+                            <li><%= rs['name'].nil? ? rs['typeID'] : rs['name'] %> : (Level <%= rs['skillLevel'] %>)</li>
+                          <% end %>
+                        </ul>
+                      <% else %>
+                        <%= rqs['name'] %> : (Level <%= rqs['skillLevel'] %>)
+                      <% end %>
+                    <% end %>
+                  <% end %>
+                </td>
+              </tr>
+            <% end %>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
+<script>
+  $( document ).ready(function() {
+    getSkillTree(function(data){
+      $('div#skillRaw').data('skill_info', data);
+    });
+    $('.collapse').collapse();
+  });
+</script>
+
+
