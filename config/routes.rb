@@ -6,7 +6,10 @@ Rails.application.routes.draw do
   root 'generals#index'
 
   # Example resource route within a namespace:
-    namespace :api do
-      get 'server_stats', to: 'misc_apis#server_stats'
-    end
+  namespace :api do
+    get 'server_stats', to: 'misc_apis#server_stats'
+    get 'skill_tree', to: 'general_apis#skill_tree'
+  end
+
+  resources :skill_trees, only: [:index]
 end

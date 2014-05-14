@@ -1,6 +1,6 @@
 AllCops:
   Exclude:
-    - db/**/*
-    - config/**/*
+    - db/**
+    - config/**
     - spec/spec_helper.rb
-    - bin/**/*
+    - bin/**

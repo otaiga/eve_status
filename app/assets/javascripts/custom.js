@@ -26,3 +26,18 @@ function updateStatusBar(data){
   statusSpan.text(status);
   playerSpan.text(players);
 }
+
+function getSkillTree(callback){
+ $.ajax(
+    {
+      url: '/api/skill_tree.json',
+      dataType: 'json',
+      type: 'get',
+      success: function(data) {
+        if (data){
+          callback(data);
+        }
+      }
+    }
+  );
+}

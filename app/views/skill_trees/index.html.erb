@@ -1,0 +1,51 @@
+<h1>Skill Listings</h1>
+<% @data.each do |group| %>
+  <div class="panel-group" id="accordion">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" data-parent="#accordion" href="#<%= group.group_name.gsub(' ', '-') %>">
+            <%= group.group_name %>
+          </a>
+        </h4>
+      </div>
+      <div id="<%= group.group_name.gsub(' ', '-')  %>" class="panel-collapse collapse in">
+        <div class="panel-body">
+          <table class='table table-striped table-hover'>
+            <thread>
+              <tr>
+                <th>Skill Name</th>
+                <th>Description</th>
+                <th>Rank</th>
+                <th>Primary Required Attribute</th>
+                <th>Secondary Required Attribute</th>
+                <th>Required Skills</th>
+              </tr>
+            </thread>
+            <% group.eve_skills.each do |skill| %>
+              <tr>
+                <td><%= skill.type_name %></td>
+                <td><%= skill.description %></td>
+                <td><%= skill.rank %></td>
+                <td><%= skill.eve_required_attributes.first.primary_attribute %></td>
+                <td><%= skill.eve_required_attributes.first.secondary_attribute%></td>
+                <td class='required'>
+                  <% skill.eve_required_skills.each do |rqs| %>
+                    <li><%= rqs.name %> : (Lvl <%= rqs.skill_level %>)</li>
+                  <% end %>
+                </td>
+              </tr>
+            <% end %>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
+<script>
+  $( document ).ready(function() {
+    $('.collapse').collapse();
+  });
+</script>
+
+

@@ -15,4 +15,5 @@
 /log/*.log
 /tmp
 .DS_Store
+sample_data
 
