@@ -9,7 +9,7 @@ module Api
     private
 
     def formatted_data
-      EveSkillGrp.all.map do |group|
+      EveSkills::EveSkillGrp.all.map do |group|
         {
           group_name: group.group_name,
           group_skills: formatted_skills(group)

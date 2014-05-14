@@ -31,7 +31,7 @@
                 <td><%= skill.eve_required_attributes.first.secondary_attribute%></td>
                 <td class='required'>
                   <% skill.eve_required_skills.each do |rqs| %>
-                    <%= rqs.name %> : (Level <%= rqs.skill_level %>)
+                    <li><%= rqs.name %> : (Lvl <%= rqs.skill_level %>)</li>
                   <% end %>
                 </td>
               </tr>

@@ -16,7 +16,9 @@ class SkillIngestion
     def update_skill_data(data)
       return unless data
       data.each do |record|
-        skill_grp = EveSkillGrp.find_or_create_by(group_name: record[:group])
+        skill_grp = EveSkills::EveSkillGrp.find_or_create_by(
+          group_name: record[:group]
+        )
         skills = record[:skills]
         update_group_skills(skill_grp, skills) unless skills.empty?
       end

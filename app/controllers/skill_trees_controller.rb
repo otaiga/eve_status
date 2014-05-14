@@ -1,5 +1,6 @@
+# skills controller
 class SkillTreesController < ApplicationController
   def index
-    @data = EveSkillGrp.all
+    @data = EveSkills::EveSkillGrp.all
   end
 end
