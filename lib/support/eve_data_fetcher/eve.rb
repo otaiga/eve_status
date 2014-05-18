@@ -9,7 +9,7 @@ module EveDataFetcher
       def alliance_info
         # Optional : ?version=1
         response = call_eve('eve/AllianceList.xml.aspx')
-        response.parsed_response
+        alliance_response(response.parsed_response)
       end
 
       # can accept comma separated list
