@@ -13,7 +13,7 @@
 
 ActiveRecord::Schema.define(version: 20140518172031) do
 
-  create_table "eve_alliances_eve_alliances", force: true do |t|
+  create_table "eve_alliances", force: true do |t|
     t.string   "name"
     t.string   "short_name"
     t.integer  "alliance_id"
@@ -24,8 +24,8 @@ ActiveRecord::Schema.define(version: 20140518172031) do
     t.datetime "updated_at"
   end
 
-  create_table "eve_alliances_eve_member_corporations", force: true do |t|
-    t.integer  "eve_alliances_id"
+  create_table "eve_member_corporations", force: true do |t|
+    t.integer  "eve_alliance_id"
     t.integer  "corporation_id"
     t.datetime "start_date"
     t.datetime "created_at"
