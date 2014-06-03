@@ -1,0 +1,31 @@
+<h1>Alliance Information</h1>
+<%= will_paginate @data %>
+<div class="panel-group" id="accordion">
+  <table class='table table-striped table-hover'>
+    <thread>
+      <tr>
+        <th>Name</th>
+        <th>Short Name</th>
+        <th>Alliance ID</th>
+        <th>Executor Corp ID</th>
+        <th>Member Count</th>
+        <th>Start Date</th>
+      </tr>
+    </thread>
+    <% @data.each do |alliance| %>
+      <tr data-toggle="collapse" data-parent="#accordion" href="#<%= alliance.alliance_id %>">
+        <td><%= alliance.name %></td>
+        <td><%= alliance.short_name %></td>
+        <td><%= alliance.alliance_id %></td>
+        <td><%= alliance.executor_corp_id %></td>
+        <td><%= alliance.member_count %></td>
+        <td><%= alliance.start_date %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>
+<script>
+  $( document ).ready(function() {
+    $('.collapse').collapse();
+  });
+</script>

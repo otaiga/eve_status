@@ -4,12 +4,12 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
   root 'generals#index'
+  get 'skill_trees', to: 'generals#skills'
+  get 'alliance_info', to: 'generals#alliance'
 
   # Example resource route within a namespace:
   namespace :api do
     get 'server_stats', to: 'misc_apis#server_stats'
     get 'skill_tree', to: 'general_apis#skill_tree'
   end
-
-  resources :skill_trees, only: [:index]
 end
