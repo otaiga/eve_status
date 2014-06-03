@@ -1,5 +1,5 @@
 require 'spec_helper'
 
-describe EveRequiredAttribute do
+describe EveSkills::EveRequiredAttribute do
   pending "add some examples to (or delete) #{__FILE__}"
 end

@@ -11,7 +11,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140513110200) do
+ActiveRecord::Schema.define(version: 20140518172031) do
+
+  create_table "eve_alliances", force: true do |t|
+    t.string   "name"
+    t.string   "short_name"
+    t.integer  "alliance_id"
+    t.integer  "executor_corp_id"
+    t.integer  "member_count"
+    t.datetime "start_date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "eve_member_corporations", force: true do |t|
+    t.integer  "eve_alliance_id"
+    t.integer  "corporation_id"
+    t.datetime "start_date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "eve_required_attributes", force: true do |t|
     t.string   "primary_attribute"
